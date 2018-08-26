@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -17,7 +19,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan(basePackages = {
-        "hnx.demo.springboot.mapper.secondary" }, sqlSessionFactoryRef = "sqlSessionFactory2", sqlSessionTemplateRef = "sqlSessionTemplate2")
+        "com.transwarp.demo.service.dao.secondary" }, sqlSessionFactoryRef = "sqlSessionFactory2", sqlSessionTemplateRef = "sqlSessionTemplate2")
 public class MybatisSecondaryConfig {
 
     @Autowired
@@ -37,5 +39,10 @@ public class MybatisSecondaryConfig {
     public SqlSessionTemplate sqlSessionTemplate2() throws Exception {
         SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory2());
         return template;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager1() throws Exception {
+        return new DataSourceTransactionManager(secondaryDataSource);
     }
 }

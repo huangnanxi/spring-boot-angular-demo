@@ -1,6 +1,6 @@
-package com.transwarp.demo.portal.common;
+package com.transwarp.demo.portal.common.entity;
 
-import com.transwarp.demo.common.Entity.Result;
+import com.transwarp.demo.common.entity.Result;
 
 /**
  * Created by huangnx on 2018/8/26.

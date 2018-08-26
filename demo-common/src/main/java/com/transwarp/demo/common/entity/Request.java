@@ -1,7 +1,7 @@
-package com.transwarp.demo.common.Entity;
+package com.transwarp.demo.common.entity;
 
 /**
  * Created by huangnx on 2018/8/26.
  */
-public class Request {
+public class Request extends Entity {
 }

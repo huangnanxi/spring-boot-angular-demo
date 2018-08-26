@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -18,7 +20,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan(basePackages = {
-        "hnx.demo.springboot.mapper.primary" }, sqlSessionFactoryRef = "sqlSessionFactory1", sqlSessionTemplateRef = "sqlSessionTemplate1")
+        "com.transwarp.demo.service.dao.primary" }, sqlSessionFactoryRef = "sqlSessionFactory1", sqlSessionTemplateRef = "sqlSessionTemplate1")
 public class MybatisPrimaryConfig {
 
     @Autowired
@@ -40,5 +42,11 @@ public class MybatisPrimaryConfig {
     public SqlSessionTemplate sqlSessionTemplate1() throws Exception {
         SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory1());
         return template;
+    }
+
+    @Bean
+    @Primary
+    public PlatformTransactionManager transactionManager1() throws Exception {
+        return new DataSourceTransactionManager(primaryDataSource);
     }
 }

@@ -6,7 +6,7 @@ import com.transwarp.demo.portal.form.RegisterForm;
 /**
  * Created by huangnx on 2018/8/26.
  */
-public class FromConventUtil {
+public class FormConventUtil {
 
     public static RegiserUserInfoReqDto convent(RegisterForm registerForm) {
         RegiserUserInfoReqDto regiserUserInfoReqDto = new RegiserUserInfoReqDto();

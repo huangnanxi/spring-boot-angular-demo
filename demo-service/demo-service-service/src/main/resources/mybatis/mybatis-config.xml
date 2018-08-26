@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 
 <configuration>
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="logPrefix" value="dao."/>
+    </settings>
     <typeAliases>
         <typeAlias alias="Integer" type="java.lang.Integer"/>
         <typeAlias alias="Long" type="java.lang.Long"/>
