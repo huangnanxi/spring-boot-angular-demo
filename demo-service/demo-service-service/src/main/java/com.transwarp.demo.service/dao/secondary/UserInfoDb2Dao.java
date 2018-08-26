@@ -4,15 +4,12 @@ import com.transwarp.demo.dmo.UserInfo;
 import com.transwarp.demo.dto.GetUserInfoReqDto;
 import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.*;
 
 /**
  * Created by huangnx on 2018/8/23.
  */
 @Mapper
-@Component
 public interface UserInfoDb2Dao {
 
     /**
@@ -28,6 +25,7 @@ public interface UserInfoDb2Dao {
      * @param loginUserReqDto
      * @return
      */
+    @Select("SELECT COUNT(USER_NAME) FROM T_USER_INFO WHERE USER_NAME = #{userName} AND PSW = #{psw}")
     public Integer login(LoginUserReqDto loginUserReqDto);
 
     /**
@@ -35,5 +33,8 @@ public interface UserInfoDb2Dao {
      * @param getUserInfoReqDto
      * @return
      */
+    @Select("SELECT * FROM T_USER_INFO WHERE USER_NAME = #{userName}")
+    @Results({ @Result(column = "USER_NAME", property = "userName"), @Result(column = "PSW", property = "psw"),
+            @Result(column = "REAL_NAME", property = "realName"), @Result(column = "AGE", property = "age") })
     public UserInfo getUserInfo(GetUserInfoReqDto getUserInfoReqDto);
 }

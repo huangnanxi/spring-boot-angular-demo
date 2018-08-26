@@ -12,5 +12,11 @@
     <groupId>com.transwarp.demo</groupId>
     <artifactId>demo-service-dmo</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.transwarp.demo</groupId>
+            <artifactId>demo-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

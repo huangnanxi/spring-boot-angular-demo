@@ -2,6 +2,7 @@ package com.transwarp.demo.service.service;
 
 import com.transwarp.demo.common.response.UserResponseCode;
 import com.transwarp.demo.common.trace.ServiceTrace;
+import com.transwarp.demo.dmo.UserInfo;
 import com.transwarp.demo.dto.GetUserInfoReqDto;
 import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
@@ -54,11 +55,33 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public LoginUserResult login(LoginUserReqDto loginUserReqDto) {
-        return null;
+        LoginUserResult loginUserResult = new LoginUserResult();
+
+        Boolean getStatus1 = userInfoDb1Dao.login(loginUserReqDto) > 0;
+
+        Boolean getStatus2 = userInfoDb2Dao.login(loginUserReqDto) > 0;
+
+        if (!getStatus1 || !getStatus2) {
+            loginUserResult.fail(UserResponseCode.LOGIN_FAIL_CODE, UserResponseCode.LOGIN_FAIL_MSG);
+        }
+        return loginUserResult;
     }
 
     @Override
     public UserInfoResult getUserInfo(GetUserInfoReqDto getUserInfoReqDto) {
-        return null;
+        UserInfoResult userInfoResult = new UserInfoResult();
+
+        UserInfo userInfo1 = userInfoDb1Dao.getUserInfo(getUserInfoReqDto);
+        UserInfo userInfo2 = userInfoDb2Dao.getUserInfo(getUserInfoReqDto);
+        if (userInfo1 == null || userInfo2 == null) {
+            userInfoResult.fail(UserResponseCode.USER_INFO_NOT_EXISTS_CODE, UserResponseCode.USER_INFO_NOT_EXISTS_MSG);
+        }
+
+        userInfoResult.setUserName(userInfo1.getUserName());
+        userInfoResult.setPsw(userInfo1.getPsw());
+        userInfoResult.setRealName(userInfo1.getRealName());
+        userInfoResult.setAge(userInfo1.getAge());
+
+        return userInfoResult;
     }
 }

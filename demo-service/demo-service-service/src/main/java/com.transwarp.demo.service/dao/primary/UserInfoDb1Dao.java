@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  * Created by huangnx on 2018/8/23.
  */
 @Mapper
-@Component
 public interface UserInfoDb1Dao {
 
     /**
