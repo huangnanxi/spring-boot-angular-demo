@@ -1,15 +1,20 @@
 package com.transwarp.demo.portal.controller;
 
+import com.transwarp.demo.dto.GetUserInfoReqDto;
+import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import com.transwarp.demo.ext.UserInfoExtSerivce;
 import com.transwarp.demo.portal.common.entity.JsonResult;
 import com.transwarp.demo.portal.common.util.FormConventUtil;
 import com.transwarp.demo.portal.form.LoginForm;
 import com.transwarp.demo.portal.form.RegisterForm;
+import com.transwarp.demo.result.LoginUserResult;
 import com.transwarp.demo.result.RegisterUserInfoResult;
+import com.transwarp.demo.result.UserInfoResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,13 +62,41 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String register(LoginForm loginForm) {
-        return "Hello World!";
+    public JsonResult register(@Valid LoginForm loginForm, BindingResult bindingResult) {
+        JsonResult jsonResult = new JsonResult();
+
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> list = bindingResult.getAllErrors();
+            for (ObjectError error : list) {
+                LOGGER.debug(error.getDefaultMessage());
+            }
+            jsonResult.fail("paramCheckFail", "请检查表单，填写规范");
+        } else {
+            LoginUserReqDto loginUserReqDto = FormConventUtil.convent(loginForm);
+            LoginUserResult loginUserResult = userInfoExtSerivce.login(loginUserReqDto);
+
+            jsonResult.copy(loginUserResult);
+        }
+
+        return jsonResult;
     }
 
     @RequestMapping(value = "/getUserInfo/{userName}", method = RequestMethod.GET)
-    public String register(@PathVariable("userName") String userName) {
-        return "Hello World!";
+    public JsonResult register(@PathVariable("userName") String userName) {
+        JsonResult jsonResult = new JsonResult();
+
+        if (StringUtils.isEmpty(userName)) {
+            jsonResult.fail("paramCheckFail", "请求参数错误");
+        } else {
+            GetUserInfoReqDto getUserInfoReqDto = new GetUserInfoReqDto();
+            getUserInfoReqDto.setUserName(userName);
+            UserInfoResult userInfoResult = userInfoExtSerivce.getUserInfo(getUserInfoReqDto);
+
+            jsonResult.copy(userInfoResult);
+            jsonResult.setData(userInfoResult);
+        }
+
+        return jsonResult;
     }
 
 }

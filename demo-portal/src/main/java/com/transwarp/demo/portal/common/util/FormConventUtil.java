@@ -1,6 +1,8 @@
 package com.transwarp.demo.portal.common.util;
 
+import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
+import com.transwarp.demo.portal.form.LoginForm;
 import com.transwarp.demo.portal.form.RegisterForm;
 
 /**
@@ -16,5 +18,13 @@ public class FormConventUtil {
         regiserUserInfoReqDto.setAge(registerForm.getAge());
 
         return regiserUserInfoReqDto;
+    }
+
+    public static LoginUserReqDto convent(LoginForm registerForm) {
+        LoginUserReqDto loginUserReqDto = new LoginUserReqDto();
+        loginUserReqDto.setUserName(registerForm.getUserName());
+        loginUserReqDto.setPsw(registerForm.getPsw());
+
+        return loginUserReqDto;
     }
 }
