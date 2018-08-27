@@ -7,6 +7,7 @@ import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import com.transwarp.demo.ext.UserInfoExtSerivce;
 import com.transwarp.demo.result.LoginUserResult;
 import com.transwarp.demo.result.RegisterUserInfoResult;
+import com.transwarp.demo.result.UserInfoListResult;
 import com.transwarp.demo.result.UserInfoResult;
 import com.transwarp.demo.service.inf.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,10 @@ public class UserInfoExtServiceImpl implements UserInfoExtSerivce {
     @Override
     public UserInfoResult getUserInfo(GetUserInfoReqDto getUserInfoReqDto) {
         return userInfoService.getUserInfo(getUserInfoReqDto);
+    }
+
+    @Override
+    public UserInfoListResult getUserInfoList() {
+        return userInfoService.getUserInfoList();
     }
 }

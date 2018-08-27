@@ -6,6 +6,8 @@ import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * Created by huangnx on 2018/8/23.
  */
@@ -37,4 +39,13 @@ public interface UserInfoDb2Dao {
     @Results({ @Result(column = "USER_NAME", property = "userName"), @Result(column = "PSW", property = "psw"),
             @Result(column = "REAL_NAME", property = "realName"), @Result(column = "AGE", property = "age") })
     public UserInfo getUserInfo(GetUserInfoReqDto getUserInfoReqDto);
+
+    /**
+     * 获取用户信息列表
+     * @return
+     */
+    @Select("SELECT * FROM T_USER_INFO")
+    @Results({ @Result(column = "USER_NAME", property = "userName"), @Result(column = "PSW", property = "psw"),
+            @Result(column = "REAL_NAME", property = "realName"), @Result(column = "AGE", property = "age") })
+    public List<UserInfo> getUserInfoList();
 }

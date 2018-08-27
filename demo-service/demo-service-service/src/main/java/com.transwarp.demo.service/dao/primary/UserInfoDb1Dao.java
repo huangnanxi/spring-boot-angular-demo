@@ -5,7 +5,8 @@ import com.transwarp.demo.dto.GetUserInfoReqDto;
 import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Created by huangnx on 2018/8/23.
@@ -33,4 +34,10 @@ public interface UserInfoDb1Dao {
      * @return
      */
     public UserInfo getUserInfo(GetUserInfoReqDto getUserInfoReqDto);
+
+    /**
+     * 获取用户信息列表
+     * @return
+     */
+    public List<UserInfo> getUserInfoList();
 }

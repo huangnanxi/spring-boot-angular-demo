@@ -5,6 +5,7 @@ import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import com.transwarp.demo.result.LoginUserResult;
 import com.transwarp.demo.result.RegisterUserInfoResult;
+import com.transwarp.demo.result.UserInfoListResult;
 import com.transwarp.demo.result.UserInfoResult;
 
 /**
@@ -32,4 +33,10 @@ public interface UserInfoService {
      * @return
      */
     public UserInfoResult getUserInfo(GetUserInfoReqDto getUserInfoReqDto);
+
+    /**
+     * 获取用户信息列表
+     * @return
+     */
+    public UserInfoListResult getUserInfoList();
 }

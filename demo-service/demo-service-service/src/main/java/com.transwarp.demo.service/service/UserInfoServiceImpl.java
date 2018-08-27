@@ -8,12 +8,16 @@ import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
 import com.transwarp.demo.result.LoginUserResult;
 import com.transwarp.demo.result.RegisterUserInfoResult;
+import com.transwarp.demo.result.UserInfoListResult;
 import com.transwarp.demo.result.UserInfoResult;
 import com.transwarp.demo.service.dao.primary.UserInfoDb1Dao;
 import com.transwarp.demo.service.dao.secondary.UserInfoDb2Dao;
 import com.transwarp.demo.service.inf.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by huangnx on 2018/8/26.
@@ -83,5 +87,26 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfoResult.setAge(userInfo1.getAge());
 
         return userInfoResult;
+    }
+
+    @Override
+    public UserInfoListResult getUserInfoList() {
+        UserInfoListResult userInfoListResult = new UserInfoListResult();
+        userInfoListResult.setItemList(new ArrayList<>());
+
+        List<UserInfo> userInfo1 = userInfoDb1Dao.getUserInfoList();
+        List<UserInfo> userInfo2 = userInfoDb2Dao.getUserInfoList();
+
+        for (UserInfo userInfo : userInfo1) {
+            UserInfoResult userInfoResult = new UserInfoResult();
+            userInfoResult.setUserName(userInfo.getUserName());
+            userInfoResult.setPsw(userInfo.getPsw());
+            userInfoResult.setRealName(userInfo.getRealName());
+            userInfoResult.setAge(userInfo.getAge());
+
+            userInfoListResult.getItemList().add(userInfoResult);
+        }
+
+        return userInfoListResult;
     }
 }

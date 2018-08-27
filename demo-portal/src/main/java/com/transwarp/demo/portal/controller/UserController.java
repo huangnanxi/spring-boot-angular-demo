@@ -10,6 +10,7 @@ import com.transwarp.demo.portal.form.LoginForm;
 import com.transwarp.demo.portal.form.RegisterForm;
 import com.transwarp.demo.result.LoginUserResult;
 import com.transwarp.demo.result.RegisterUserInfoResult;
+import com.transwarp.demo.result.UserInfoListResult;
 import com.transwarp.demo.result.UserInfoResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult register(@Valid LoginForm loginForm, BindingResult bindingResult) {
+    public JsonResult login(@Valid LoginForm loginForm, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult();
 
         if (bindingResult.hasErrors()) {
@@ -82,7 +83,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserInfo/{userName}", method = RequestMethod.GET)
-    public JsonResult register(@PathVariable("userName") String userName) {
+    public JsonResult getUserInfo(@PathVariable("userName") String userName) {
         JsonResult jsonResult = new JsonResult();
 
         if (StringUtils.isEmpty(userName)) {
@@ -99,4 +100,15 @@ public class UserController {
         return jsonResult;
     }
 
+    @RequestMapping(value = "/getUserInfoList", method = RequestMethod.GET)
+    public JsonResult getUserInfoList() {
+        JsonResult jsonResult = new JsonResult();
+
+        UserInfoListResult userInfoListResult = userInfoExtSerivce.getUserInfoList();
+
+        jsonResult.copy(userInfoListResult);
+        jsonResult.setData(userInfoListResult);
+
+        return jsonResult;
+    }
 }

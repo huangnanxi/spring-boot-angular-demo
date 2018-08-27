@@ -24,4 +24,9 @@
         SELECT <include refid="columns"/>
         FROM T_USER_INFO WHERE USER_NAME = #{userName}
     </select>
+
+    <select id="getUserInfoList" resultType="com.transwarp.demo.dmo.UserInfo">
+        SELECT <include refid="columns"/>
+        FROM T_USER_INFO
+    </select>
 </mapper>
