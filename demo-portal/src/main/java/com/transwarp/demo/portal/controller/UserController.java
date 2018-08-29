@@ -41,12 +41,12 @@ public class UserController {
     @Autowired
     private UserInfoExtSerivce  userInfoExtSerivce;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "Hello World!";
     }
 
-    @RequestMapping("/demoInfo")
+    @RequestMapping(value = "/demoInfo", method = RequestMethod.GET)
     public DemoInfo demoInfo() {
         return demoInfo;
     }
