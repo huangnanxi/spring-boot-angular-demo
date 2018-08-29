@@ -1,5 +1,6 @@
 package com.transwarp.demo.portal.controller;
 
+import com.transwarp.demo.common.config.DemoInfo;
 import com.transwarp.demo.dto.GetUserInfoReqDto;
 import com.transwarp.demo.dto.LoginUserReqDto;
 import com.transwarp.demo.dto.RegiserUserInfoReqDto;
@@ -35,11 +36,19 @@ public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
+    private DemoInfo            demoInfo;
+
+    @Autowired
     private UserInfoExtSerivce  userInfoExtSerivce;
 
     @RequestMapping("/")
     public String home() {
         return "Hello World!";
+    }
+
+    @RequestMapping("/demoInfo")
+    public DemoInfo demoInfo() {
+        return demoInfo;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

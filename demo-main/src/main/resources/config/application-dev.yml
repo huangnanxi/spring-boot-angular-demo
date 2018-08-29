@@ -20,9 +20,11 @@ management:
     servlet:
       context-path: /admin
 
-ownerinfo:
-  age: 26
+demoinfo:
   name: springbootDemo
+  desc: springboot-angular-Demo
+  creators[0]: lhldyf
+  creators[1]: huangnx
 
 spring:
   freemarker:

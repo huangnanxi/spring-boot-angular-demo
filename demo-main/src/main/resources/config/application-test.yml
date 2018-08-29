@@ -1,11 +1,30 @@
 server:
-  port: 8080
+  port: 8081
   servlet:
-    context-path: /hello
+    context-path: /
 
-ownerinfo:
-  age: 26
+info:
+  head: head
+  body: body
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  security: false
+  server:
+    port: 8083
+    servlet:
+      context-path: /admin
+
+demoinfo:
   name: springbootDemo
+  desc: springbootDemo
+  creators[0]: lhldyf
+  creators[1]: huangnx
 
 spring:
   freemarker:

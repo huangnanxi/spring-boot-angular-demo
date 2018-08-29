@@ -1,25 +1,23 @@
 package com.transwarp.demo.portal.form;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by huangnx on 2018/8/26.
  */
 public class RegisterForm {
 
-    @NotEmpty(message = "用户名不能为空")
+    @NotNull(message = "用户名不能为空")
     private String  userName;
 
-    @NotEmpty(message = "密码不能为空")
-    @Length(min = 6, message = "密码长度不能少于6位")
+    @NotNull(message = "密码不能为空")
+    @Size(min = 6, message = "密码长度不能少于6位")
     private String  psw;
 
-    @NotEmpty(message = "真实姓名不能为空")
+    @NotNull(message = "真实姓名不能为空")
     private String  realName;
 
     @NotNull(message = "年龄不能为空")
