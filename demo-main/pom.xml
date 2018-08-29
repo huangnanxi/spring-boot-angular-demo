@@ -12,6 +12,10 @@
     <groupId>com.transwarp.demo</groupId>
     <artifactId>demo-main</artifactId>
 
+    <properties>
+        <docker.image.prefix>springboot</docker.image.prefix>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.transwarp.demo</groupId>
@@ -42,13 +46,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -68,7 +65,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>docker_spring_boot</finalName>
     </build>
 
 </project>
