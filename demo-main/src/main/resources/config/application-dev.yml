@@ -4,21 +4,13 @@ server:
     context-path: /
 
 info:
-  head: head
-  body: body
+  name: springboot-angular-demo
 management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: always
-  security: false
-  server:
-    port: 8083
-    servlet:
-      context-path: /admin
+  context-path: /manage
+  port: 8083
+  security:
+    enabled: false
+  address: 127.0.0.1
 
 demoinfo:
   name: springbootDemo

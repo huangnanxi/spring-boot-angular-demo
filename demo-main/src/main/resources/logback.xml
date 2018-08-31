@@ -86,6 +86,7 @@
 
     <logger name="com.transwarp.demo.service.dao" level="ALL" additivity="false">
         <appender-ref ref="sqlAppender"/>
+        <appender-ref ref="stdout"/>
     </logger>
 
     <root>
