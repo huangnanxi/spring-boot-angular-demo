@@ -20,14 +20,12 @@
 
 
 
-父pom：
+### 父pom：
  
 需要注明parent。这里用的是springboot 1.5.9.RELEASE 的版本。
 
 然后定义了下其它pom依赖以及内部module依赖的版本管理
  
-
-
 
 几个核心的pom依赖介绍
 加载自定义配置类所需：
@@ -46,16 +44,15 @@ springboot应用入口类：
  
 
 class上加注解：@SpringBootApplication，标明这是一个springboot的应用。
-	注解：@SpringBootApplication是多个springboot注解的聚合。
-	其中三个比较重要
-	@Configuration（@SpringBootConfiguration点开查看发现里面还是应用了@Configuration）
-	@EnableAutoConfiguration
-	@ComponentScan
+注解：@SpringBootApplication是多个springboot注解的聚合。
+
+其中三个比较重要
+*	@Configuration（@SpringBootConfiguration点开查看发现里面还是应用了@Configuration）
+*	@EnableAutoConfiguration
+*	@ComponentScan
 
 @ Configuration是标识一个class是IoC容器的配置类（SpringBoot鼓励基于JavaConfig的配置形式）
-
 @ComponentScan 动扫描并加载符合条件的组件（比如@Component和@Repository等）或者bean定义，最终将这些bean定义加载到IoC容器中。默认是从声明@ComponentScan所在类的package进行扫描。（也可通过参数自定义）
-
 @EnableAutoConfiguration 借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器
 
 
@@ -149,26 +146,26 @@ Actuator监控
 可以通过下述restful 接口查看监控信息
 Actuator 提供了 13 个接口，具体如下表所示。
 HTTP 方法	路径	描述
-GET	/autoconfig	提供了一份自动配置报告，记录哪些自动配置条件通过了，哪些没通过
-GET	/configprops	描述配置属性(包含默认值)如何注入Bean
-GET	/beans	描述应用程序上下文里全部的Bean，以及它们的关系
-GET	/dump	获取线程活动的快照
-GET	/env	获取全部环境属性
-GET	/env/{name}	根据名称获取特定的环境属性值
-GET	/health	报告应用程序的健康指标，这些值由HealthIndicator的实现类提供
-GET	/info	获取应用程序的定制信息，这些信息由info打头的属性提供
-GET	/mappings	描述全部的URI路径，以及它们和控制器(包含Actuator端点)的映射关系
-GET	/metrics	报告各种应用程序度量信息，比如内存用量和HTTP请求计数
-GET	/metrics/{name}	报告指定名称的应用程序度量值
-POST	/shutdown	关闭应用程序，要求endpoints.shutdown.enabled设置为true
-GET	/trace	提供基本的HTTP请求跟踪信息(时间戳、HTTP头等)
+* GET	/autoconfig	提供了一份自动配置报告，记录哪些自动配置条件通过了，哪些没通过
+* GET	/configprops	描述配置属性(包含默认值)如何注入Bean
+* GET	/beans	描述应用程序上下文里全部的Bean，以及它们的关系
+* GET	/dump	获取线程活动的快照
+* GET	/env	获取全部环境属性
+* GET	/env/{name}	根据名称获取特定的环境属性值
+* GET	/health	报告应用程序的健康指标，这些值由HealthIndicator的实现类提供
+* GET	/info	获取应用程序的定制信息，这些信息由info打头的属性提供
+* GET	/mappings	描述全部的URI路径，以及它们和控制器(包含Actuator端点)的映射关系
+* GET	/metrics	报告各种应用程序度量信息，比如内存用量和HTTP请求计数
+* GET	/metrics/{name}	报告指定名称的应用程序度量值
+* POST	/shutdown	关闭应用程序，要求endpoints.shutdown.enabled设置为true
+* GET	/trace	提供基本的HTTP请求跟踪信息(时间戳、HTTP头等)
 
-spring-boot-admin监控
+## spring-boot-admin监控
 参考：
 https://github.com/codecentric/spring-boot-admin
 https://www.jianshu.com/p/e20a5f42a395
  
-深入探索SpringApplication执行流程
+## 深入探索SpringApplication执行流程
 SpringApplication的run方法的实现是我们本次旅程的主要线路，该方法的主要流程大体可以归纳如下：
 
 1.	如果我们使用的是SpringApplication的静态run方法，那么，这个方法里面首先要创建一个SpringApplication对象实例，然后调用这个创建好的SpringApplication的实例方法。在SpringApplication实例初始化的时候，它会提前做几件事情：
@@ -191,7 +188,7 @@ d)	推断并设置main方法的定义类。
 去除事件通知点后，整个流程如下：
  
 
-附学习资源文档：
+## 附学习资源文档：
 ➢	SpringBoot各版本官方文档：
 	https://docs.spring.io/spring-boot/docs/
 
