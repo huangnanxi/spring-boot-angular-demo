@@ -6,18 +6,17 @@
 
 ## 跟着demo学习springboot
 
-### 工程结构。如图：
+### 工程结构。
  
-
 5个module:
-. demo-portal：controller层的东西
-. demo-service：
-. demo-service-client：对外暴露服务的接口定义
-. demo-service-dmo：数据库实体定义
-. demo-service-service：服务实现
-. demo-common：常量、工具类、全局配置
-. demo-main：可执行程序
-. demo-test：
+* demo-portal：controller层的东西
+* demo-service：
+* demo-service-client：对外暴露服务的接口定义
+* demo-service-dmo：数据库实体定义
+* demo-service-service：服务实现
+* demo-common：常量、工具类、全局配置
+* demo-main：可执行程序
+* demo-test：
 
 
 
