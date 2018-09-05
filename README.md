@@ -40,7 +40,7 @@ SpringBoot，单元测试必需
 SpringBoot，开发热部署必需
  
 
-springboot应用入口类：
+### springboot应用入口类：
  
 
 class上加注解：@SpringBootApplication，标明这是一个springboot的应用。
@@ -59,12 +59,12 @@ class上加注解：@SpringBootApplication，标明这是一个springboot的应�
 PS：Demo中的配置如下。把数据库配置的自动装载给去掉了。原因是：demo中用到了多数据源，用的是自定义的数据库配置
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 
-装载自定义的xml配置
+### 装载自定义的xml配置
 如下，加上这个注解即可（按照springbot的理念（去xml化），此种方式不推荐）
 @ImportResource(locations = "classpath:spring/application-aop.xml")
 
 
-SpringBoot应用配置文件
+### SpringBoot应用配置文件
 如下图，application.yml是SpringBoot应用启动加载的配置文件
  
 
@@ -85,7 +85,7 @@ SpringBoot应用配置文件
 
 
 
-demo-portal
+### demo-portal
 
 没什么好讲的。和spring MVC差不多
 
@@ -93,7 +93,7 @@ demo-portal
 
 
 
-demo-service
+### demo-service
 Dao层和普通的spring应用有些区别
 	可以选用mapper的方式使用mybatis
 	 
@@ -113,7 +113,7 @@ Demo-common
 	Redis的配置：RedisConfig
 	自定义属性类：DemoInfo
 
-关于多数据源的配置
+### 关于多数据源的配置
 该类配置了两个数据库的DataSource的bean。通过@ConfigurationProperties注解注明加载的是application.yml中的哪个配置项
  
 
@@ -121,12 +121,12 @@ Demo-common
 该类配置了主库SessioFactory、SessionTemplate、事务的配置。@MapperScan注解标明了包路径‘com.transwarp.demo.service.dao.primary’下的mapper走的是primary库。
 同理另外一个配置类MybatisSecondaryConfig 是包路径‘com.transwarp.demo.service.dao.secondary’下的mapper走的是secondary 库 
 
-关于自定义配置类
+### 关于自定义配置类
 定义一个class与application.yml中的属性对应。然后class上加上如下注解。就可以通过@Autowired的方式使用它了
  
  
 
-Demo-test
+### Demo-test
 使用起来和junitTest区别不大
 
 还可以test url
@@ -134,7 +134,7 @@ Demo-test
 
 
  
-SpringBoot应用监控
+## SpringBoot应用监控
 Actuator监控
 加上pom依赖
  
