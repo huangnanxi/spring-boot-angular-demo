@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -52,7 +49,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public JsonResult register(@Valid RegisterForm registerForm, BindingResult bindingResult) {
+    public JsonResult register(@RequestBody @Valid RegisterForm registerForm, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult();
 
         if (bindingResult.hasErrors()) {
@@ -72,7 +69,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JsonResult login(@Valid LoginForm loginForm, BindingResult bindingResult) {
+    public JsonResult login(@RequestBody @Valid LoginForm loginForm, BindingResult bindingResult) {
         JsonResult jsonResult = new JsonResult();
 
         if (bindingResult.hasErrors()) {

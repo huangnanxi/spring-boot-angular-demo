@@ -55,6 +55,9 @@ public class ApplicationTests {
     public void homeTest() throws Exception {
         String result = mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+        System.out.println(result);
+
         Assert.assertEquals("Hello World!", result);
     }
 
