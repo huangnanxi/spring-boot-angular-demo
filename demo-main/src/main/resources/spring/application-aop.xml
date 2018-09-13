@@ -8,18 +8,4 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"
        default-autowire="byName">
 
-
-    <bean id="serviceTraceInterceptor" class="com.transwarp.demo.common.trace.ServiceTraceInterceptor" >
-        <property name="filterArgs">
-            <value></value>
-        </property>
-    </bean>
-
-    <aop:config proxy-target-class="true" />
-
-    <aop:config>
-        <aop:pointcut id="serviceTracePointcut" expression="@within(com.transwarp.demo.common.trace.ServiceTrace)" />
-        <aop:advisor advice-ref="serviceTraceInterceptor" pointcut-ref="serviceTracePointcut" order="100" />
-    </aop:config>
-
 </beans>
