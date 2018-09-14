@@ -7,9 +7,16 @@ import com.transwarp.demo.common.entity.Result;
 import com.transwarp.demo.common.response.ErrorCode;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
@@ -17,7 +24,9 @@ import java.lang.reflect.Method;
 /**
  * Created by huangnx on 2018/8/26.
  */
-public class ServiceTraceInterceptor implements MethodInterceptor {
+@Aspect
+@Component
+public class ServiceTraceInterceptor {
     /** logger */
     private static final Logger logger     = LoggerFactory.getLogger(ServiceTraceInterceptor.class);
 
@@ -29,51 +38,56 @@ public class ServiceTraceInterceptor implements MethodInterceptor {
 
     /** 实现一个FastJSON过滤器 */
     private ValueFilter         nameFilter = new ValueFilter() {
-                                               @Override
-                                               public Object process(Object source, String name, Object value) {
-                                                   Object result = value;
+        @Override
+        public Object process(Object source, String name, Object value) {
+            Object result = value;
 
-                                                   if (filterArgs == null || value == null) {
-                                                       return result;
-                                                   }
+            if (filterArgs == null || value == null) {
+                return result;
+            }
 
-                                                   try {
-                                                       for (String filterArg : filterArgs) {
-                                                           if (name.equals(filterArg) && ClassUtils
-                                                                   .isAssignableValue(String.class, value)) {
-                                                               result = ((String) value).length() + "L";
+            try {
+                for (String filterArg : filterArgs) {
+                    if (name.equals(filterArg) && ClassUtils
+                            .isAssignableValue(String.class, value)) {
+                        result = ((String) value).length() + "L";
 
-                                                               break;
-                                                           }
-                                                       }
-                                                   } catch (Throwable t) {
-                                                       logger.error("FastJSON过滤异常", t);
-                                                   }
+                        break;
+                    }
+                }
+            } catch (Throwable t) {
+                logger.error("FastJSON过滤异常", t);
+            }
 
-                                                   return result;
-                                               }
-                                           };
+            return result;
+        }
+    };
+
+    @Pointcut("@within(com.transwarp.demo.common.trace.ServiceTrace)")
+    public void traceLog(){}
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public Object invoke(final MethodInvocation invocation) throws Throwable {
-        Method method = invocation.getMethod();
-        Object target = invocation.getThis();
+    @Around("traceLog()")
+    public Object invoke(ProceedingJoinPoint pjp) throws Throwable {
         Object result = null;
 
-        String methodName = target.getClass().getSimpleName() + "." + method.getName();
+        Signature s = pjp.getSignature();
+        MethodSignature ms = (MethodSignature)s;
+        Method method = ms.getMethod();
+
+        String methodName = pjp.getClass().getSimpleName() + "." + method.getName();
         TraceLog traceLog = new TraceLog(logger, methodName, this.threshold);
 
         if (logger.isDebugEnabled()) {
             logger.debug("ME:{}|Begin|ARGS:{}", methodName,
-                    JSON.toJSONString(invocation.getArguments(), this.nameFilter));
+                    JSON.toJSONString(pjp.getArgs(), this.nameFilter));
         }
 
         try {
             traceLog.begin();
-            result = invocation.proceed();
+            result = pjp.proceed();
 
             // 返回结果异常判断
             if (ClassUtils.isAssignable(Result.class, method.getReturnType())) {
